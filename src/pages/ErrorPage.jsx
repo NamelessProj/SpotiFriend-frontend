@@ -1,4 +1,5 @@
 import {Typography} from "@material-tailwind/react";
+import {Link} from "react-router-dom";
 
 const ErrorPage = () => {
     return (
@@ -12,6 +13,12 @@ const ErrorPage = () => {
             <Typography variant="h2" as="p">
                 Not Found
             </Typography>
+
+            <div className="mt-6">
+                <Typography variant="lead" className="text-center">
+                    Go back to the <Link to="/" className="text-primary-green">homepage</Link>
+                </Typography>
+            </div>
         </main>
     );
 };
