@@ -42,7 +42,6 @@ export const useUserStore = create((set) => ({
             });
             set(() => ({user: response.data.user, userLoading: false}));
         }catch(error){
-            console.log(error);
             set({userError: error.response.data.message || error.message, userLoading: false});
         }
     },
