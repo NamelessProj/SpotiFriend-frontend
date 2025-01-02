@@ -71,7 +71,7 @@ const RegisterForm = () => {
                         </Alert>
                     )}
                     {userError && (
-                        <Alert color="blue" className="mb-6">
+                        <Alert color="red" className="mb-6">
                             {userError}
                         </Alert>
                     )}
