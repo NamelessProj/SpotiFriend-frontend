@@ -2,8 +2,8 @@ import {Typography} from "@material-tailwind/react";
 
 const ErrorPage = () => {
     return (
-        <main className="h-full flex flex-col justify-center items-center">
-            <Typography variant="h1">
+        <main className="h-full flex flex-col justify-center items-center text-primary-white">
+            <Typography variant="h1" className="text-7xl">
                 404
             </Typography>
             <Typography variant="h2">

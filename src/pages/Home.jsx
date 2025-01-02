@@ -1,5 +1,4 @@
 import {Typography} from "@material-tailwind/react";
-import {Link} from "react-router-dom";
 
 const Home = () => {
     return (
@@ -7,7 +6,6 @@ const Home = () => {
             <Typography variant="h1">
                 Home
             </Typography>
-            <Link to="room">Room</Link>
         </div>
     );
 };
