@@ -2,6 +2,7 @@ import {useEffect, useState} from "react";
 import {useUserStore} from "../stores/userStore.js";
 import {useAuthStore} from "../stores/authStore.js";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
+import NProgress from "nprogress";
 
 const RegisterForm = () => {
     const [email, setEmail] = useState("");
@@ -46,9 +47,12 @@ const RegisterForm = () => {
         }
 
         try{
+            NProgress.start();
             await register({email: emailForm, password: passwordForm, username: usernameForm});
         }catch(error){
             setError(error);
+        }finally{
+            NProgress.done();
         }
     }
 

@@ -2,6 +2,7 @@ import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@mat
 import {useEffect, useState} from "react";
 import {useUserStore} from "../stores/userStore.js";
 import {useAuthStore} from "../stores/authStore.js";
+import NProgress from "nprogress";
 
 const LoginForm = () => {
     const [email, setEmail] = useState("");
@@ -30,9 +31,12 @@ const LoginForm = () => {
         }
 
         try{
+            NProgress.start();
             await login({email: emailForm, password: passwordForm});
         }catch(error){
             setError(error);
+        }finally{
+            NProgress.done();
         }
     }
 
