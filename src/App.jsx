@@ -7,9 +7,9 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 function App() {
     return (
         <Routes>
-            <Route path="/" element={<Layout />}>
+            <Route path="/" element={<Layout /> }>
                 <Route index element={<Home />} />
-                <Route path="room" element={<Room />}/>
+                <Route path="room/:id" element={<Room />} />
                 <Route path="*" element={<ErrorPage />} />
             </Route>
         </Routes>
