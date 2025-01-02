@@ -2,7 +2,7 @@ import {Typography} from "@material-tailwind/react";
 
 const Header = () => {
     return (
-        <header className=" flex justify-center">
+        <header className="flex justify-center items-center">
             <Typography variant="h2" as="p" className="text-primary-green">
                 SpotiFriend
             </Typography>
