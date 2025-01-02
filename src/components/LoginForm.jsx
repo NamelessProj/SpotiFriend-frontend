@@ -9,7 +9,7 @@ const LoginForm = () => {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
-    const {user, login} = useUserStore();
+    const {user, userError, login} = useUserStore();
     const {setCredentials} = useAuthStore();
 
     useEffect(() => {
@@ -52,6 +52,11 @@ const LoginForm = () => {
                     {error && (
                         <Alert color="red" className="mb-6">
                             {error}
+                        </Alert>
+                    )}
+                    {userError && (
+                        <Alert color="red" className="mb-6">
+                            {userError}
                         </Alert>
                     )}
                     <form className="flex flex-col gap-3" onSubmit={handleSubmit}>
