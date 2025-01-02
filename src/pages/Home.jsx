@@ -2,11 +2,11 @@ import {Typography} from "@material-tailwind/react";
 
 const Home = () => {
     return (
-        <div>
+        <main>
             <Typography variant="h1">
                 Home
             </Typography>
-        </div>
+        </main>
     );
 };
 
