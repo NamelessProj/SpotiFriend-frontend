@@ -7,12 +7,14 @@ import NProgress from "nprogress";
 
 const UserProfile = () => {
     const {userInfo, setCredentials, logout} = useAuthStore();
-    const {user, userError, userLogout, updateUser} = useUserStore();
+    const {user, userError, userLogout, updateUser, deleteUser} = useUserStore();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
     const [logoutError, setLogoutError] = useState("");
+
+    const [deleteError, setDeleteError] = useState("");
 
     const navigate = useNavigate();
 
@@ -67,6 +69,22 @@ const UserProfile = () => {
         }
     }
 
+    const handleDelete = async (e) => {
+        e.preventDefault();
+        setDeleteError("");
+
+        try{
+            NProgress.start();
+            await deleteUser();
+            logout();
+            navigate("/");
+        }catch(error){
+            setDeleteError(error);
+        }finally{
+            NProgress.done();
+        }
+    }
+
     return (
         <main>
             {userInfo && (
@@ -83,7 +101,7 @@ const UserProfile = () => {
                     </div>
                     <div className="mt-12 max-w-[500px] mx-auto">
                         <Card>
-                            <CardHeader color="green" variant="gradient" className="flex justify-center items-center">
+                            <CardHeader color="green" variant="gradient" className="flex justify-center items-center py-3">
                                 <Typography variant="h1">
                                     {userInfo.username}
                                 </Typography>
@@ -114,6 +132,25 @@ const UserProfile = () => {
                                         Edit
                                     </Button>
                                 </form>
+                            </CardBody>
+                        </Card>
+                    </div>
+                    <div className="mt-24 max-w-[500px] mx-auto">
+                        <Card>
+                            <CardHeader color="red" variant="gradient" className="flex justify-center items-center py-3">
+                                <Typography variant="h2">
+                                    Delete Account
+                                </Typography>
+                            </CardHeader>
+                            <CardBody className="flex flex-col gap-3 justify-center items-center">
+                                {deleteError && (
+                                    <Alert color="red">
+                                        {deleteError}
+                                    </Alert>
+                                )}
+                                <Button color="red" variant="gradient" onClick={handleDelete}>
+                                    Delete Account
+                                </Button>
                             </CardBody>
                         </Card>
                     </div>
