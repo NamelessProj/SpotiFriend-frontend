@@ -6,3 +6,7 @@ body,
 #root{
     min-height: 100svh;
 }
+
+#nprogress .bar{
+    background: #1ED760!important;
+}
