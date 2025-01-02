@@ -7,9 +7,11 @@ const Header = () => {
 
     return (
         <header className="flex flex-col-reverse gap-2 justify-center items-center my-2 relative">
-            <Typography variant="h2" as="p" className="text-primary-green">
-                SpotiFriend
-            </Typography>
+            <Link to="/">
+                <Typography variant="h2" as="p" className="text-primary-green">
+                    SpotiFriend
+                </Typography>
+            </Link>
 
             <div className="md:absolute top-1/2 right-2 md:transform md:-translate-y-1/2">
                 <Button size="sm" color="green" className="text-primary-black">
