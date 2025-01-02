@@ -1,8 +1,21 @@
 import {Tab, TabPanel, Tabs, TabsBody, TabsHeader} from "@material-tailwind/react";
 import LoginForm from "../components/LoginForm.jsx";
 import RegisterForm from "../components/RegisterForm.jsx";
+import {useAuthStore} from "../stores/authStore.js";
+import {useEffect} from "react";
+import {useNavigate} from "react-router-dom";
 
 const Login = () => {
+    const {userInfo} = useAuthStore();
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if(userInfo){
+            navigate("/");
+        }
+    }, [navigate, userInfo]);
+
     return (
         <main>
             <div className="max-w-[500px] mx-auto mt-6">
