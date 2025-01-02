@@ -15,7 +15,7 @@ export const useUserStore = create((set) => ({
             });
             set(() => ({user: response.data.user, userLoading: false}));
         }catch(error){
-            set({userError: error.response.data.message, userLoading: false});
+            set({userError: error.response.data.message || error.message, userLoading: false});
         }
     },
 
@@ -28,7 +28,8 @@ export const useUserStore = create((set) => ({
             });
             set(() => ({user: response.data.user, userLoading: false}));
         }catch(error){
-            set({userError: error.response.data.message, userLoading: false});
+            console.log(error);
+            set({userError: error.response.data.message || error.message, userLoading: false});
         }
     },
 
@@ -41,7 +42,7 @@ export const useUserStore = create((set) => ({
             });
             set(() => ({user: null, userLoading: false}));
         }catch(error){
-            set({userError: error.response.data.message, userLoading: false});
+            set({userError: error.response.data.message || error.message, userLoading: false});
         }
     },
 
@@ -54,7 +55,7 @@ export const useUserStore = create((set) => ({
             });
             set(() => ({user: null, userLoading: false}));
         }catch(error){
-            set({userError: error.response.data.message, userLoading: false});
+            set({userError: error.response.data.message || error.message, userLoading: false});
         }
     }
 }));
