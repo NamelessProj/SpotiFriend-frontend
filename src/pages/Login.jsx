@@ -5,9 +5,9 @@ import RegisterForm from "../components/RegisterForm.jsx";
 const Login = () => {
     return (
         <main>
-            <div>
+            <div className="max-w-[500px] mx-auto mt-6">
                 <Tabs value="login">
-                    <TabsHeader>
+                    <TabsHeader className="mb-3">
                         <Tab value="login">
                             Login
                         </Tab>
