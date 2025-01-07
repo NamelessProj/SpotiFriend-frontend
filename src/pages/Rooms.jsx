@@ -22,6 +22,9 @@ const Rooms = () => {
 
     useEffect(() => {
         setRoomCount(rooms.length);
+        setRoomName("");
+        setRoomDescription("");
+        setRoomIsPublic(false);
     }, [rooms]);
 
     const handleCreateRoom = async (e) => {
@@ -125,7 +128,7 @@ const Rooms = () => {
                                     </Alert>
                                 )}
                                 {rooms.length ? (
-                                    <div className="mt-6">
+                                    <div className="mt-6 flex flex-col gap-6">
                                         {rooms.map((room, index) => (
                                             <Card key={index} style={{width: "min(100%, 500px)"}}>
                                                 <CardBody className="relative">
