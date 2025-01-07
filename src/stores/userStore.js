@@ -9,10 +9,7 @@ export const useUserStore = create((set) => ({
     register: async (data) => {
         set({userLoading: true, userError: null});
         try{
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/register`, data, {
-                withCredentials: true,
-                method: "post",
-            });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/register`, data);
             set(() => ({user: response.data.user, userLoading: false}));
         }catch(error){
             set({userError: error.response.data.message || error.message, userLoading: false});
@@ -22,10 +19,7 @@ export const useUserStore = create((set) => ({
     login: async (data) => {
         set({userLoading: true, userError: null});
         try{
-            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, data, {
-                withCredentials: true,
-                method: "post",
-            });
+            const response = await axios.post(`${import.meta.env.VITE_API_URL}/user/login`, data);
             set(() => ({user: response.data.user, userLoading: false}));
         }catch(error){
             console.log(error);
