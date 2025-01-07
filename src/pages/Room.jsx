@@ -34,7 +34,7 @@ const Room = () => {
                                 </Typography>
                             </div>
                         </div>
-                    ) : (
+                    ):(
                         <p>No room</p>
                     )}
                 </>
