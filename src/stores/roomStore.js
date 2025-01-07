@@ -37,7 +37,7 @@ export const useRoomStore = create((set) => ({
                 withCredentials: true,
                 method: "post",
             });
-            set(() => ({room: response.data.room, roomLoading: false}));
+            set(() => ({rooms: response.data.rooms, roomLoading: false}));
         }catch(error){
             set({roomError: error.response.data.message || error.message, roomLoading: false});
         }
