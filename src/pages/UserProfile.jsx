@@ -14,6 +14,7 @@ const UserProfile = () => {
 
     const [logoutError, setLogoutError] = useState("");
 
+    const [deletePassword, setDeletePassword] = useState("");
     const [deleteError, setDeleteError] = useState("");
 
     const navigate = useNavigate();
@@ -73,9 +74,14 @@ const UserProfile = () => {
         e.preventDefault();
         setDeleteError("");
 
+        if(deletePassword === ""){
+            setDeleteError("Please fill in all the fields.");
+            return;
+        }
+
         try{
             NProgress.start();
-            await deleteUser();
+            await deleteUser(deletePassword);
             logout();
             navigate("/");
         }catch(error){
@@ -148,9 +154,17 @@ const UserProfile = () => {
                                         {deleteError}
                                     </Alert>
                                 )}
-                                <Button color="red" variant="gradient" onClick={handleDelete}>
-                                    Delete Account
-                                </Button>
+                                <form className="flex flex-col gap-3" onSubmit={handleDelete}>
+                                    <Input
+                                        value={deletePassword}
+                                        onChange={(e) => setDeletePassword(e.target.value)}
+                                        type="password"
+                                        label="Password"
+                                    />
+                                    <Button color="red" variant="gradient" onClick={handleDelete}>
+                                        Delete Account
+                                    </Button>
+                                </form>
                             </CardBody>
                         </Card>
                     </div>
