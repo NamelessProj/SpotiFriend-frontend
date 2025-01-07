@@ -53,11 +53,11 @@ export const useUserStore = create((set) => ({
         }
     },
 
-    deleteUser: async () => {
+    deleteUser: async (password) => {
         set({userLoading: true, userError: null});
         try{
-            await axios.delete(`${import.meta.env.VITE_API_URL}/user/delete`,{
-                method: 'delete',
+            await axios.post(`${import.meta.env.VITE_API_URL}/user/delete`, password, {
+                method: 'post',
                 withCredentials: true,
             });
             set(() => ({user: null, userLoading: false}));
