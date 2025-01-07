@@ -15,9 +15,11 @@ const Room = () => {
     return (
         <main>
             {roomError && (
-                <Alert color="red" className="mb-6">
-                    {roomError}
-                </Alert>
+                <div className="my-6 flex justify-center items-center">
+                    <Alert color="red" className="w-fit">
+                        {roomError}
+                    </Alert>
+                </div>
             )}
             {roomLoading ? (
                 <p>Loading...</p>
