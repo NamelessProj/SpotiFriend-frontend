@@ -95,6 +95,13 @@ const UserProfile = () => {
         <main>
             {userInfo && (
                 <div>
+                    {userError && (
+                        <div className="mb-6 flex justify-center items-center">
+                            <Alert color="red">
+                                {userError}
+                            </Alert>
+                        </div>
+                    )}
                     <div className="flex flex-col gap-3 justify-center items-center">
                         {logoutError && (
                             <Alert color="red">
@@ -116,11 +123,6 @@ const UserProfile = () => {
                                 {error && (
                                     <Alert color="red" className="mb-3">
                                         {error}
-                                    </Alert>
-                                )}
-                                {userError && (
-                                    <Alert color="red" className="mb-3">
-                                        {userError}
                                     </Alert>
                                 )}
                                 <form className="flex flex-col gap-3" onSubmit={handleEdit}>
