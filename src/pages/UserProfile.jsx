@@ -81,7 +81,7 @@ const UserProfile = () => {
 
         try{
             NProgress.start();
-            await deleteUser(deletePassword);
+            await deleteUser({password: deletePassword});
             logout();
             navigate("/");
         }catch(error){
@@ -148,9 +148,9 @@ const UserProfile = () => {
                                     Delete Account
                                 </Typography>
                             </CardHeader>
-                            <CardBody className="flex flex-col gap-3 justify-center items-center">
+                            <CardBody>
                                 {deleteError && (
-                                    <Alert color="red">
+                                    <Alert color="red" className="mb-6">
                                         {deleteError}
                                     </Alert>
                                 )}
