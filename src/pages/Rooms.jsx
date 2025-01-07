@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 
 const Rooms = () => {
     const {userInfo} = useAuthStore();
-    const {rooms, roomLoading, roomError, getRoomsOfUser, createRoom} = useRoomStore();
+    const {rooms, roomLoading, roomError, getRoomsOfUser, createRoom, deleteRoom} = useRoomStore();
 
     const [roomName, setRoomName] = useState("");
     const [roomDescription, setRoomDescription] = useState("");
@@ -45,6 +45,19 @@ const Rooms = () => {
         try{
             NProgress.start();
             await createRoom({name, description, isPublic});
+        }catch(error){
+            console.error(error);
+        }finally{
+            NProgress.done();
+        }
+    }
+
+    const handleDeleteRoom = async (e, id) => {
+        e.preventDefault();
+
+        try{
+            NProgress.start();
+            await deleteRoom(id);
         }catch(error){
             console.error(error);
         }finally{
@@ -127,11 +140,14 @@ const Rooms = () => {
                                                         {import.meta.env.VITE_BASE_URL}/room/{room._id}
                                                     </Typography>
                                                 </CardBody>
-                                                <CardFooter>
+                                                <CardFooter className="flex justify-between">
                                                     <Button color="green" variant="gradient">
                                                         <Link to={`/room/edit/${room._id}`}>
                                                             Edit
                                                         </Link>
+                                                    </Button>
+                                                    <Button color="red" variant="gradient" onClick={(e) => handleDeleteRoom(e, room._id)}>
+                                                        Delete
                                                     </Button>
                                                 </CardFooter>
                                             </Card>
