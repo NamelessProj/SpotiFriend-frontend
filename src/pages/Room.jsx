@@ -10,7 +10,7 @@ const Room = () => {
 
     useEffect(() => {
         getRoomById(id);
-    }, []);
+    }, [id]);
 
     return (
         <main>
