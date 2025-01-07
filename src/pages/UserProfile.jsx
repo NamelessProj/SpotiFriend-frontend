@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 
 const UserProfile = () => {
     const {userInfo, setCredentials, logout} = useAuthStore();
-    const {user, userError, userLogout, updateUser, deleteUser} = useUserStore();
+    const {user, userError, userDeleteSuccess, userLogout, updateUser, deleteUser} = useUserStore();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
@@ -27,6 +27,13 @@ const UserProfile = () => {
             navigate("/login");
         }
     }, [userInfo, navigate]);
+
+    useEffect(() => {
+        if(userDeleteSuccess){
+            logout();
+            navigate("/");
+        }
+    }, [userDeleteSuccess]);
 
     useEffect(() => {
         if(user) setCredentials(user);
@@ -82,8 +89,6 @@ const UserProfile = () => {
         try{
             NProgress.start();
             await deleteUser({password: deletePassword});
-            logout();
-            navigate("/");
         }catch(error){
             setDeleteError(error);
         }finally{
@@ -97,7 +102,7 @@ const UserProfile = () => {
                 <div>
                     {userError && (
                         <div className="mb-6 flex justify-center items-center">
-                            <Alert color="red">
+                            <Alert color="red" className="w-fit">
                                 {userError}
                             </Alert>
                         </div>
