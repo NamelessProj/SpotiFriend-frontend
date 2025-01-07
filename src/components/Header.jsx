@@ -1,4 +1,4 @@
-import {Button, Typography} from "@material-tailwind/react";
+import {Button, Menu, MenuHandler, MenuItem, MenuList, Typography} from "@material-tailwind/react";
 import {useAuthStore} from "../stores/authStore.js";
 import {Link} from "react-router-dom";
 
@@ -14,17 +14,33 @@ const Header = () => {
             </Link>
 
             <div className="md:absolute top-1/2 right-2 md:transform md:-translate-y-1/2">
-                <Button size="sm" color="green" className="text-primary-black">
-                    {userInfo ? (
-                        <Link to="profile">
-                            {userInfo.username}
-                        </Link>
-                    ):(
+                {userInfo ? (
+                    <Menu>
+                        <MenuHandler>
+                            <Button size="sm" color="green" className="text-primary-black">
+                                {userInfo.username}
+                            </Button>
+                        </MenuHandler>
+                        <MenuList>
+                            <MenuItem>
+                                <Link to="profile">
+                                    Profile
+                                </Link>
+                            </MenuItem>
+                            <MenuItem>
+                                <Link to="rooms">
+                                    Rooms
+                                </Link>
+                            </MenuItem>
+                        </MenuList>
+                    </Menu>
+                ):(
+                    <Button size="sm" color="green" className="text-primary-black">
                         <Link to="login">
                             Login
                         </Link>
-                    )}
-                </Button>
+                    </Button>
+                )}
             </div>
         </header>
     );
