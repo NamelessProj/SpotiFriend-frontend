@@ -4,6 +4,7 @@ import AdminLayout from "./components/AdminLayout.jsx";
 import Home from "./pages/Home.jsx";
 import Login from "./pages/Login.jsx";
 import UserProfile from "./pages/UserProfile.jsx";
+import Rooms from "./pages/Rooms.jsx";
 import Room from "./pages/Room.jsx";
 import AdminHome from "./pages/AdminHome.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -15,6 +16,7 @@ function App() {
                 <Route index element={<Home />} />
                 <Route path="login" element={<Login />} />
                 <Route path="profile" element={<UserProfile />} />
+                <Route path="rooms" element={<Rooms />} />
                 <Route path="room/:id" element={<Room />} />
                 <Route path="admin" element={<AdminLayout />}>
                     <Route index element={<AdminHome />} />
