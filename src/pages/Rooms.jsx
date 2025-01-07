@@ -139,8 +139,10 @@ const Rooms = () => {
                                                     <Typography>
                                                         {room.description}
                                                     </Typography>
-                                                    <Typography className="overflow-clip">
-                                                        {import.meta.env.VITE_BASE_URL}/room/{room._id}
+                                                    <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100">
+                                                        <Link to={`${import.meta.env.VITE_BASE_URL}/room/${room._id}`}>
+                                                            {import.meta.env.VITE_BASE_URL}/room/{room._id}
+                                                        </Link>
                                                     </Typography>
                                                 </CardBody>
                                                 <CardFooter className="flex justify-between">
