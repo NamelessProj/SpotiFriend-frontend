@@ -1,7 +1,7 @@
 import {create} from "zustand";
 import axios from "axios";
 
-export const useRoomStore = create((set => ({
+export const useRoomStore = create((set) => ({
     room: null,
     rooms: [],
     roomLoading: false,
@@ -68,4 +68,4 @@ export const useRoomStore = create((set => ({
             set({roomError: error.response.data.message || error.message, roomLoading: false});
         }
     }
-})));
+}));
