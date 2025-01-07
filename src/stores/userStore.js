@@ -5,6 +5,7 @@ export const useUserStore = create((set) => ({
     user: null,
     userLoading: false,
     userError: null,
+    userDeleteSuccess: false,
 
     register: async (data) => {
         set({userLoading: true, userError: null});
@@ -54,13 +55,13 @@ export const useUserStore = create((set) => ({
     },
 
     deleteUser: async (data) => {
-        set({userLoading: true, userError: null});
+        set({userLoading: true, userError: null, userDeleteSuccess: false});
         try{
             await axios.post(`${import.meta.env.VITE_API_URL}/user/delete`, data, {
                 method: 'post',
                 withCredentials: true,
             });
-            set(() => ({user: null, userLoading: false}));
+            set(() => ({user: null, userLoading: false, userDeleteSuccess: true}));
         }catch(error){
             set({userError: error.response.data.message || error.message, userLoading: false});
         }
