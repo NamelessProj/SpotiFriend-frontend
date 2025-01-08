@@ -1,7 +1,7 @@
 import {useParams} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {useRoomStore} from "../stores/roomStore.js";
-import {Alert, Button, Card, CardBody, CardFooter, Input, Typography} from "@material-tailwind/react";
+import {Alert, Button, Card, CardBody, Input, Typography} from "@material-tailwind/react";
 import axios from "axios";
 import NProgress from "nprogress";
 import {usePropositionStore} from "../stores/propositionStore.js";
