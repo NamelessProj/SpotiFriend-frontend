@@ -44,15 +44,15 @@ export const useRoomStore = create((set) => ({
     },
 
     updateRoom: async (id, data) => {
-        set({roomLoading: true, roomError: null});
+        set({roomError: null});
         try{
             const response = await axios.put(`${import.meta.env.VITE_API_URL}/room/${id}`, data, {
                 withCredentials: true,
                 method: "put",
             });
-            set(() => ({room: response.data.room, roomLoading: false}));
+            set(() => ({room: response.data.room}));
         }catch(error){
-            set({roomError: error.response.data.message || error.message, roomLoading: false});
+            set({roomError: error.response.data.message || error.message});
         }
     },
 
