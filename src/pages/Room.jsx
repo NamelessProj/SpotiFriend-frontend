@@ -4,11 +4,13 @@ import {useRoomStore} from "../stores/roomStore.js";
 import {Alert, Button, Card, CardBody, CardFooter, Input, Typography} from "@material-tailwind/react";
 import axios from "axios";
 import NProgress from "nprogress";
+import {usePropositionStore} from "../stores/propositionStore.js";
 
 const Room = () => {
     const {id} = useParams();
 
     const {room, roomLoading, roomError, getRoomById} = useRoomStore();
+    const {sendProposition} = usePropositionStore();
 
     const [loading, setLoading] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
@@ -66,6 +68,19 @@ const Room = () => {
         }
     }
 
+    const handleSendProposition = async (e, song) => {
+        e.preventDefault();
+
+        try{
+            NProgress.start();
+            await sendProposition(id, {song});
+        }catch(error){
+            console.error(error);
+        }finally{
+            NProgress.done();
+        }
+    }
+
     return (
         <main>
             {roomError && (
@@ -76,7 +91,11 @@ const Room = () => {
                 </div>
             )}
             {roomLoading ? (
-                <p>Loading...</p>
+                <div className="flex justify-center">
+                    <Typography variant="lead" className="text-primary-white text-center">
+                        Loading...
+                    </Typography>
+                </div>
             ):(
                 <>
                     {room ? (
@@ -115,28 +134,51 @@ const Room = () => {
                             </div>
                             <div className="mt-12">
                                 {loading ? (
-                                    <p>Loading...</p>
+                                    <div>
+                                        <Typography variant="lead" className="text-primary-white text-center">
+                                            Loading...
+                                        </Typography>
+                                    </div>
                                 ):(
                                     <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
-                                        {searchResults.map((track) => (
-                                            <Card key={track.id}>
-                                                <CardBody>
-                                                    <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="w-full h-48 object-cover mb-4 rounded-lg"/>
-                                                    <Typography variant="h3">
-                                                        {track.name}
-                                                    </Typography>
-                                                    <Typography>
-                                                        {track.artists.map((artist) => artist.name).join(", ")}
-                                                    </Typography>
-                                                </CardBody>
-                                            </Card>
-                                        ))}
+                                        {searchResults.length ? (
+                                            <>
+                                                {searchResults.map((track) => (
+                                                    <Card key={track.id}>
+                                                        <CardBody>
+                                                            <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="w-full h-48 object-cover mb-4 rounded-lg"/>
+                                                            <Typography variant="h3">
+                                                                {track.name}
+                                                            </Typography>
+                                                            <Typography>
+                                                                {track.artists.map((artist) => artist.name).join(", ")}
+                                                            </Typography>
+                                                        </CardBody>
+                                                        <CardFooter>
+                                                            <Button color="green" variant="gradient" onClick={(e) => handleSendProposition(e, track)}>
+                                                                Send Proposition
+                                                            </Button>
+                                                        </CardFooter>
+                                                    </Card>
+                                                ))}
+                                            </>
+                                        ):(
+                                            <div>
+                                                <Typography variant="lead" className="text-primary-white text-center">
+                                                    Try searching for a song.
+                                                </Typography>
+                                            </div>
+                                        )}
                                     </div>
                                 )}
                             </div>
                         </section>
                     ):(
-                        <p>No room</p>
+                        <div>
+                            <Typography variant="h2" className="text-primary-white text-center">
+                                Room not found.
+                            </Typography>
+                        </div>
                     )}
                 </>
             )}
