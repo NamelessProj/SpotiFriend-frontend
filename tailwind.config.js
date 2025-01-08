@@ -5,7 +5,7 @@ module.exports = withMT({
   theme: {
     extend: {
       gridTemplateRows: {
-        'app': 'minmax(60px, auto) 1fr 22px',
+        'app': '0 minmax(60px, auto) 1fr 22px',
       },
       colors: {
         primary: {
