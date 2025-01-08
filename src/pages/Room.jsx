@@ -5,6 +5,7 @@ import {Alert, Button, Card, CardBody, CardFooter, Input, Typography} from "@mat
 import axios from "axios";
 import NProgress from "nprogress";
 import {usePropositionStore} from "../stores/propositionStore.js";
+import DefaultSpinner from "../components/DefaultSpinner.jsx";
 
 const Room = () => {
     const {id} = useParams();
@@ -128,10 +129,8 @@ const Room = () => {
                 </div>
             )}
             {roomLoading ? (
-                <div className="flex justify-center">
-                    <Typography variant="lead" className="text-primary-white text-center">
-                        Loading...
-                    </Typography>
+                <div className="h-full flex justify-center items-center">
+                    <DefaultSpinner />
                 </div>
             ):(
                 <>
@@ -180,10 +179,8 @@ const Room = () => {
                             </div>
                             <div className="mt-12">
                                 {loading ? (
-                                    <div>
-                                        <Typography variant="lead" className="text-primary-white text-center">
-                                            Loading...
-                                        </Typography>
+                                    <div className="h-full flex justify-center items-center">
+                                        <DefaultSpinner />
                                     </div>
                                 ):(
                                     <div className="grid grid-cols-1 gap-6 max-w-2xl mx-auto">
