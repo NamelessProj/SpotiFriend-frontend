@@ -6,12 +6,13 @@ import axios from "axios";
 import NProgress from "nprogress";
 import {usePropositionStore} from "../stores/propositionStore.js";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
+import {toast} from "react-toastify";
 
 const Room = () => {
     const {id} = useParams();
 
     const {room, roomLoading, roomError, getRoomById} = useRoomStore();
-    const {sendProposition} = usePropositionStore();
+    const {propositionError, propositionSuccess, sendProposition} = usePropositionStore();
 
     const [loading, setLoading] = useState(false);
     const [searchResults, setSearchResults] = useState([]);
@@ -24,6 +25,14 @@ const Room = () => {
     useEffect(() => {
         getRoomById(id);
     }, [id]);
+
+    useEffect(() => {
+        if(propositionError) toast(propositionError, {type: "error"});
+    }, [propositionError]);
+
+    useEffect(() => {
+        if(propositionSuccess) toast("Proposition sent.", {type: "success"});
+    }, [propositionSuccess]);
 
     const handleSearch = async (e) => {
         e.preventDefault();
@@ -85,7 +94,7 @@ const Room = () => {
                 setToken(response.data.token);
                 accessToken = response.data.token;
             }catch(error){
-                setError(error.response.data.message || error.message);
+                toast(error.response.data.message || error.message, {type: "error"});
                 NProgress.done();
                 return;
             }
@@ -100,7 +109,7 @@ const Room = () => {
             setSearchResults((prev) => [...prev, ...response.data.tracks.items]);
             setSearchNext(response.data.tracks.next);
         }catch(error){
-            setError(error.message);
+            toast(error.message, {type: "error"});
         }finally{
             NProgress.done();
         }
