@@ -6,6 +6,7 @@ export const useRoomStore = create((set) => ({
     rooms: [],
     roomLoading: false,
     roomError: null,
+    roomSuccess: false,
 
     getRoomById: async (id) => {
         set({roomLoading: true, roomError: null});
@@ -44,15 +45,15 @@ export const useRoomStore = create((set) => ({
     },
 
     updateRoom: async (id, data) => {
-        set({roomError: null});
+        set({roomError: null, roomSuccess: false});
         try{
             const response = await axios.put(`${import.meta.env.VITE_API_URL}/room/${id}`, data, {
                 withCredentials: true,
                 method: "put",
             });
-            set(() => ({room: response.data.room}));
+            set(() => ({room: response.data.room, roomSuccess: true}));
         }catch(error){
-            set({roomError: error.response.data.message || error.message});
+            set({roomError: error.response.data.message || error.message, roomSuccess: false});
         }
     },
 
