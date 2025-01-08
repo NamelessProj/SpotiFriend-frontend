@@ -214,7 +214,7 @@ const Room = () => {
                                                     </Card>
                                                 ))}
                                                 {searchNext && (
-                                                    <div className="flex justify-center my-6">
+                                                    <div className="flex justify-center mt-6 mb-24">
                                                         <Button color="green" variant="gradient" onClick={handleLoadMore}>
                                                             Load More
                                                         </Button>
