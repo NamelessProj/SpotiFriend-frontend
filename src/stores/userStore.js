@@ -47,6 +47,19 @@ export const useUserStore = create((set) => ({
         }
     },
 
+    updateUserPassword: async (data) => {
+        set({userLoading: true, userError: null});
+        try{
+            const response = await axios.put(`${import.meta.env.VITE_API_URL}/user/password`, data, {
+                withCredentials: true,
+                method: "put",
+            });
+            set(() => ({user: response.data.user, userLoading: false}));
+        }catch(error){
+            set({userError: error.response.data.message || error.message, userLoading: false});
+        }
+    },
+
     userLogout: async () => {
         set({userLoading: true, userError: null});
         try{
