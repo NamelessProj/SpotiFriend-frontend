@@ -68,6 +68,41 @@ const Room = () => {
         }
     }
 
+    const handleLoadMore = async () => {
+        setError("");
+        let accessToken = token;
+
+        NProgress.start();
+
+        // Checking if the token is available and if it is expired
+        const oneHourBefore = new Date().getTime() - 3600000;
+        if(!accessToken || accessToken.createdAt < oneHourBefore){
+            try{
+                const response = await axios.get(`${import.meta.env.VITE_API_URL}/access`);
+                setToken(response.data.token);
+                accessToken = response.data.token;
+            }catch(error){
+                setError(error.response.data.message || error.message);
+                NProgress.done();
+                return;
+            }
+        }
+
+        try{
+            const response = await axios.get(searchNext, {
+                headers: {
+                    'Authorization': `Bearer ${accessToken.token}`
+                }
+            });
+            setSearchResults((prev) => [...prev, ...response.data.tracks.items]);
+            setSearchNext(response.data.tracks.next);
+        }catch(error){
+            setError(error.message);
+        }finally{
+            NProgress.done();
+        }
+    }
+
     const handleSendProposition = async (e, song) => {
         e.preventDefault();
 
@@ -161,6 +196,13 @@ const Room = () => {
                                                         </CardFooter>
                                                     </Card>
                                                 ))}
+                                                {searchNext && (
+                                                    <div className="flex justify-center my-6">
+                                                        <Button color="green" variant="gradient" onClick={handleLoadMore}>
+                                                            Load More
+                                                        </Button>
+                                                    </div>
+                                                )}
                                             </>
                                         ):(
                                             <div>
