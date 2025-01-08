@@ -86,6 +86,9 @@ const UserProfile = () => {
         }catch(error){
             setEditPasswordError(error);
         }finally{
+            setCurrentPassword("");
+            setNewPassword("");
+            setConfirmPassword("");
             NProgress.done();
         }
     }
