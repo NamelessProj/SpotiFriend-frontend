@@ -18,6 +18,7 @@ const Room = () => {
     const [searchInput, setSearchInput] = useState("");
     const [error, setError] = useState("");
     const [token, setToken] = useState(null);
+    const [tracksNumber, setTracksNumber] = useState(0);
 
     useEffect(() => {
         getRoomById(id);
@@ -60,6 +61,7 @@ const Room = () => {
             });
             setSearchResults(response.data.tracks.items);
             setSearchNext(response.data.tracks.next);
+            setTracksNumber(response.data.tracks.total);
         }catch(error){
             setError(error.message);
         }finally{
@@ -142,6 +144,15 @@ const Room = () => {
                                 <Typography className="text-primary-white">
                                     {room.description}
                                 </Typography>
+                                {tracksNumber > 0 ? (
+                                    <Typography className="text-primary-white">
+                                        {tracksNumber} track{tracksNumber > 1 && "s"}
+                                    </Typography>
+                                ):(
+                                    <Typography className="text-primary-white">
+                                        Start searching for songs
+                                    </Typography>
+                                )}
                             </div>
                             <div>
                                 <Card className="max-w-[800px] mx-auto">
