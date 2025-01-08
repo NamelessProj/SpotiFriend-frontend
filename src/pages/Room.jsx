@@ -7,6 +7,7 @@ import NProgress from "nprogress";
 import {usePropositionStore} from "../stores/propositionStore.js";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import {toast} from "react-toastify";
+import TrackCard from "../components/TrackCard.jsx";
 
 const Room = () => {
     const {id} = useParams();
@@ -196,22 +197,7 @@ const Room = () => {
                                         {searchResults.length ? (
                                             <>
                                                 {searchResults.map((track) => (
-                                                    <Card key={track.id}>
-                                                        <CardBody>
-                                                            <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="w-full h-48 object-cover mb-4 rounded-lg"/>
-                                                            <Typography variant="h3">
-                                                                {track.name}
-                                                            </Typography>
-                                                            <Typography>
-                                                                {track.artists.map((artist) => artist.name).join(", ")}
-                                                            </Typography>
-                                                        </CardBody>
-                                                        <CardFooter>
-                                                            <Button color="green" variant="gradient" onClick={(e) => handleSendProposition(e, track)}>
-                                                                Send Proposition
-                                                            </Button>
-                                                        </CardFooter>
-                                                    </Card>
+                                                    <TrackCard key={track.id} track={track} handleSendProposition={handleSendProposition} />
                                                 ))}
                                                 {searchNext && (
                                                     <div className="flex justify-center mt-6 mb-24">
