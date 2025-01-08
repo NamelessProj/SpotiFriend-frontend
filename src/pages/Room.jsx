@@ -141,7 +141,7 @@ const Room = () => {
                                 <Typography variant="h2" className="text-primary-white">
                                     {room.name}
                                 </Typography>
-                                <Typography className="text-primary-white">
+                                <Typography variant="lead" className="text-primary-white">
                                     {room.description}
                                 </Typography>
                                 {tracksNumber > 0 ? (
