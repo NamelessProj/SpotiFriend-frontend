@@ -7,12 +7,17 @@ import NProgress from "nprogress";
 
 const UserProfile = () => {
     const {userInfo, setCredentials, logout} = useAuthStore();
-    const {user, userError, userDeleteSuccess, userLogout, updateUser, deleteUser} = useUserStore();
+    const {user, userError, userDeleteSuccess, userLogout, updateUser, updateUserPassword, deleteUser} = useUserStore();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
     const [logoutError, setLogoutError] = useState("");
+
+    const [currentPassword, setCurrentPassword] = useState("");
+    const [newPassword, setNewPassword] = useState("");
+    const [confirmPassword, setConfirmPassword] = useState("");
+    const [editPasswordError, setEditPasswordError] = useState("");
 
     const [deletePassword, setDeletePassword] = useState("");
     const [deleteError, setDeleteError] = useState("");
@@ -56,6 +61,30 @@ const UserProfile = () => {
             await updateUser({username: usernameForm, email: emailForm});
         }catch(error){
             setError(error);
+        }finally{
+            NProgress.done();
+        }
+    }
+
+    const handleEditPassword = async (e) => {
+        e.preventDefault();
+        setEditPasswordError("");
+
+        if(currentPassword === "" || newPassword === "" || confirmPassword === ""){
+            setEditPasswordError("Please fill in all the fields.");
+            return;
+        }
+
+        if(newPassword !== confirmPassword){
+            setEditPasswordError("Passwords don't match.");
+            return;
+        }
+
+        try{
+            NProgress.start();
+            await updateUserPassword({password: currentPassword, newPassword, confirmPassword});
+        }catch(error){
+            setEditPasswordError(error);
         }finally{
             NProgress.done();
         }
@@ -143,6 +172,45 @@ const UserProfile = () => {
                                     />
                                     <Button color="green" variant="gradient" onClick={handleEdit}>
                                         Edit
+                                    </Button>
+                                </form>
+                            </CardBody>
+                        </Card>
+                    </div>
+                    <div className="mt-24 max-w-[500px] mx-auto">
+                        <Card>
+                            <CardHeader color="red" variant="gradient" className="flex justify-center items-center py-3">
+                                <Typography variant="h2">
+                                    Edit Password
+                                </Typography>
+                            </CardHeader>
+                            <CardBody>
+                                {editPasswordError && (
+                                    <Alert color="red" className="mb-6">
+                                        {editPasswordError}
+                                    </Alert>
+                                )}
+                                <form className="flex flex-col gap-3" onSubmit={handleEditPassword}>
+                                    <Input
+                                        value={currentPassword}
+                                        onChange={(e) => setCurrentPassword(e.target.value)}
+                                        type="password"
+                                        label="Current Password"
+                                    />
+                                    <Input
+                                        value={newPassword}
+                                        onChange={(e) => setNewPassword(e.target.value)}
+                                        type="password"
+                                        label="New Password"
+                                    />
+                                    <Input
+                                        value={confirmPassword}
+                                        onChange={(e) => setConfirmPassword(e.target.value)}
+                                        type="password"
+                                        label="Confirm Password"
+                                    />
+                                    <Button color="red" variant="gradient" onClick={handleEditPassword}>
+                                        Edit Password
                                     </Button>
                                 </form>
                             </CardBody>
