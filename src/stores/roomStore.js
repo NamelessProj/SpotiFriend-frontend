@@ -11,7 +11,10 @@ export const useRoomStore = create((set) => ({
     getRoomById: async (id) => {
         set({roomLoading: true, roomError: null});
         try{
-            const response = await axios.get(`${import.meta.env.VITE_API_URL}/room/${id}`);
+            const response = await axios.get(`${import.meta.env.VITE_API_URL}/room/${id}`, {
+                withCredentials: true,
+                method: "get",
+            });
             set(() => ({room: response.data.room, roomLoading: false}));
         }catch(error){
             set({roomError: error.response.data.message || error.message, roomLoading: false});
