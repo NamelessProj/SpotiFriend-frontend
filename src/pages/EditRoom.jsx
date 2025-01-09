@@ -108,6 +108,14 @@ const EditRoom = () => {
                                                     label="Is Public"
                                                     color="green"
                                                 />
+                                                <div className="px-2">
+                                                    <Typography variant="small">
+                                                        Link:
+                                                    </Typography>
+                                                    <Typography variant="lead" className="w-full text-nowrap whitespace-nowrap overflow-clip" style={{textOverflow: "ellipsis"}}>
+                                                        {window.location.origin}/room/{room.slug}
+                                                    </Typography>
+                                                </div>
                                                 <Button color="green" variant="gradient" onClick={handleUpdateRoom}>
                                                     Update Room
                                                 </Button>
