@@ -183,6 +183,7 @@ const Room = () => {
                                                 onChange={(e) => setSearchInput(e.target.value)}
                                                 label="Search"
                                                 type="search"
+                                                required
                                             />
                                             <Button color="green" variant="gradient" className="flex-grow" onClick={handleSearch}>
                                                 Search
