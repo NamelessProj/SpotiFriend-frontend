@@ -39,6 +39,7 @@ const Home = () => {
                                 onChange={(e) => setInput(e.target.value)}
                                 variant="outlined"
                                 className="rounded-b-none"
+                                required
                             />
                             <Button color="green" variant="gradient" className="text-primary-black rounded-t-none" onClick={handleJoinRoom}>
                                 Join the Room
