@@ -10,9 +10,9 @@ import {toast} from "react-toastify";
 import TrackCard from "../components/TrackCard.jsx";
 
 const Room = () => {
-    const {id} = useParams();
+    const {slug} = useParams();
 
-    const {room, roomLoading, roomError, getRoomById} = useRoomStore();
+    const {room, roomLoading, roomError, getRoomBySlug} = useRoomStore();
     const {propositionError, propositionSuccess, sendProposition} = usePropositionStore();
 
     const [loading, setLoading] = useState(false);
@@ -25,8 +25,8 @@ const Room = () => {
     const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
-        getRoomById(id);
-    }, [id]);
+        getRoomBySlug(slug);
+    }, [slug]);
 
     useEffect(() => {
         if(propositionError) toast(propositionError, {type: "error"});
@@ -125,7 +125,7 @@ const Room = () => {
 
         try{
             NProgress.start();
-            await sendProposition(id, {song});
+            await sendProposition(room._id, {song});
         }catch(error){
             console.error(error);
         }finally{
