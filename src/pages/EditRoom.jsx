@@ -1,4 +1,4 @@
-import {Navigate, useParams} from "react-router-dom";
+import {Link, Navigate, useParams} from "react-router-dom";
 import {useAuthStore} from "../stores/authStore.js";
 import {Alert, Button, Card, CardBody, CardHeader, Checkbox, Input, Typography} from "@material-tailwind/react";
 import {useRoomStore} from "../stores/roomStore.js";
@@ -75,7 +75,14 @@ const EditRoom = () => {
                             {room ? (
                                 <div className="mt-12">
                                     <Card className="max-w-[500px] mx-auto">
-                                        <CardHeader color="green" className="flex flex-col justify-center items-center">
+                                        <CardHeader color="green" className="flex flex-col justify-center items-center relative">
+                                            <div className="absolute top-2 left-2">
+                                                <Button color="black" size="sm" variant="text">
+                                                    <Link to="/rooms">
+                                                        Back
+                                                    </Link>
+                                                </Button>
+                                            </div>
                                             <Typography variant="h2">
                                                 Edit Room
                                             </Typography>
