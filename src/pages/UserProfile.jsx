@@ -167,11 +167,13 @@ const UserProfile = () => {
                                         value={username}
                                         onChange={(e) => setUsername(e.target.value)}
                                         label="Username"
+                                        required
                                     />
                                     <Input
                                         value={email}
                                         onChange={(e) => setEmail(e.target.value)}
                                         label="Email"
+                                        required
                                     />
                                     <Button color="green" variant="gradient" onClick={handleEdit}>
                                         Edit
@@ -199,18 +201,21 @@ const UserProfile = () => {
                                         onChange={(e) => setCurrentPassword(e.target.value)}
                                         type="password"
                                         label="Current Password"
+                                        required
                                     />
                                     <Input
                                         value={newPassword}
                                         onChange={(e) => setNewPassword(e.target.value)}
                                         type="password"
                                         label="New Password"
+                                        required
                                     />
                                     <Input
                                         value={confirmPassword}
                                         onChange={(e) => setConfirmPassword(e.target.value)}
                                         type="password"
                                         label="Confirm Password"
+                                        required
                                     />
                                     <Button color="red" variant="gradient" onClick={handleEditPassword}>
                                         Edit Password
@@ -238,6 +243,7 @@ const UserProfile = () => {
                                         onChange={(e) => setDeletePassword(e.target.value)}
                                         type="password"
                                         label="Password"
+                                        required
                                     />
                                     <Button color="red" variant="gradient" onClick={handleDelete}>
                                         Delete Account
