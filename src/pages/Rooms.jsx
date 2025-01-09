@@ -4,6 +4,7 @@ import {useRoomStore} from "../stores/roomStore.js";
 import {useEffect, useState} from "react";
 import {Alert, Button, Card, CardBody, CardFooter, Checkbox, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
+import DefaultSpinner from "../components/DefaultSpinner.jsx";
 
 const Rooms = () => {
     const {userInfo} = useAuthStore();
@@ -84,7 +85,9 @@ const Rooms = () => {
                     )}
                     <section>
                         {roomLoading ? (
-                            <p>Loading...</p>
+                            <div className="flex justify-center items-center">
+                                <DefaultSpinner />
+                            </div>
                         ):(
                             <div className="flex flex-col gap-3 items-center">
                                 {roomCount < 10 ? (
