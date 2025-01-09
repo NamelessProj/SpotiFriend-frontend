@@ -23,7 +23,7 @@ const Home = () => {
                 <Card className="w-[min(500px,100%)] mx-auto my-6">
                     <CardHeader floated={false} shadow={false}>
                         <Typography variant="h5">
-                            Have the ID of the room you want to join?
+                            Have the slug of the room you want to join?
                         </Typography>
                     </CardHeader>
                     <CardBody>
@@ -34,7 +34,7 @@ const Home = () => {
                         )}
                         <form className="flex flex-col" onSubmit={handleJoinRoom}>
                             <Input
-                                label="Enter the room ID."
+                                label="Enter the room slug."
                                 value={input}
                                 onChange={(e) => setInput(e.target.value)}
                                 variant="outlined"
