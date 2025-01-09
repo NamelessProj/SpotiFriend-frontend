@@ -2,6 +2,7 @@ import {Outlet} from "react-router-dom";
 import Footer from "./Footer.jsx";
 import Header from "./Header.jsx";
 import {ToastContainer} from "react-toastify";
+import {SpeedInsights} from "@vercel/speed-insights/react";
 
 const Layout = () => {
     return (
@@ -10,6 +11,7 @@ const Layout = () => {
             <Header />
             <Outlet />
             <Footer />
+            <SpeedInsights />
         </div>
     );
 };
