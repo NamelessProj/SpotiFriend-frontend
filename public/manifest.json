@@ -20,5 +20,5 @@
   "orientation": "portrait-primary",
   "description": "Let your friends make suggestions for your Spotify playlist.",
   "lang": "en-US",
-  "categories": ["music", "entertainment", "spotify", "playlist"],
+  "categories": ["music", "entertainment", "spotify", "playlist"]
 }
