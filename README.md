@@ -10,10 +10,7 @@ This is the frontend for the SpotiFriend project. It is a React application that
 The following environment variables are required:
 ```env
 VITE_API_URL=http://localhost:3000/api
-VITE_BASE_URL=http://localhost:5173
 ```
 The `VITE_API_URL` variable is the URL of the backend API.
 
-The `VITE_BASE_URL` variable is the URL of the frontend application.
-
-You have to create a `.env` file in the root of the project to set these variables.
+You have to create a `.env` file in the root of the project to set this variable.
