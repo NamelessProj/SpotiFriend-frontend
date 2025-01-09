@@ -131,9 +131,9 @@ const Rooms = () => {
                                     </Alert>
                                 )}
                                 {rooms.length ? (
-                                    <div className="mt-6 flex flex-col gap-6">
+                                    <div className="mt-6 flex flex-col justify-center items-center gap-6">
                                         {rooms.map((room, index) => (
-                                            <Card key={index} style={{width: "min(100%, 500px)"}}>
+                                            <Card key={index} className="w-[min(500px,100%)]">
                                                 <CardBody className="relative">
                                                     <div className="absolute top-2 left-2 w-4 h-4 rounded-full" style={{background: room.isPublic ? 'green' : 'red'}} />
                                                     <Typography variant="h5" className="mb-2">
@@ -142,7 +142,7 @@ const Rooms = () => {
                                                     <Typography>
                                                         {room.description}
                                                     </Typography>
-                                                    <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100">
+                                                    <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100 text-nowrap w-full overflow-hidden" style={{textOverflow: "ellipsis"}}>
                                                         <Link to={`${import.meta.env.VITE_BASE_URL}/room/${room._id}`}>
                                                             {import.meta.env.VITE_BASE_URL}/room/{room._id}
                                                         </Link>
