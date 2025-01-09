@@ -19,8 +19,8 @@ const Home = () => {
 
     return (
         <main>
-            <div>
-                <Card className="max-w-[500px] mx-auto my-6">
+            <div className="h-full flex items-center">
+                <Card className="w-[min(500px,100%)] mx-auto my-6">
                     <CardHeader floated={false} shadow={false}>
                         <Typography variant="h5">
                             Have the ID of the room you want to join?
