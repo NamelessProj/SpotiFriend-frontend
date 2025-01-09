@@ -142,8 +142,8 @@ const Rooms = () => {
                                                         {room.description}
                                                     </Typography>
                                                     <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100 text-nowrap w-full overflow-hidden" style={{textOverflow: "ellipsis"}}>
-                                                        <Link to={`${import.meta.env.VITE_BASE_URL}/room/${room.slug}`}>
-                                                            {import.meta.env.VITE_BASE_URL}/room/{room.slug}
+                                                        <Link to={`${window.location.origin}/room/${room.slug}`}>
+                                                            {window.location.origin}/room/{room.slug}
                                                         </Link>
                                                     </Typography>
                                                 </CardBody>
