@@ -1,20 +1,22 @@
-import {Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
+import {Button, Card, CardBody, CardFooter, Tooltip, Typography} from "@material-tailwind/react";
 
 const TrackCard = ({track, handleSendProposition}) => {
     return (
         <Card>
-            <CardBody className="flex flex-col items-center md:grid grid-rows-2 grid-cols-[120px_1fr] md:gap-x-3">
-                <div className="h-32 md:h-12 mb-4 md:row-span-2">
-                    <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="h-32 md:h-auto object-cover mb-4 rounded-lg"/>
+            <CardBody className="grid grid-rows-[1fr_auto] grid-cols-[120px_1fr] md:gap-x-3 overflow-clip">
+                <div className="h-24 mb-4 row-span-2">
+                    <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="h-full object-cover mb-4 rounded-lg"/>
                 </div>
-                <Typography variant="h3">
-                    {track.name}
-                </Typography>
+                <Tooltip placement="top-start" content={track.name}>
+                    <Typography variant="h3" className="text-nowrap whitespace-nowrap overflow-clip w-[calc(100%-15px)]" style={{textOverflow: "ellipsis"}}>
+                        {track.name}
+                    </Typography>
+                </Tooltip>
                 <Typography>
                     {track.artists.map((artist) => artist.name).join(", ")}
                 </Typography>
             </CardBody>
-            <CardFooter className="flex md:mt-3">
+            <CardFooter className="flex mt-0 pt-0">
                 <Button color="green" variant="gradient" className="flex-grow" onClick={(e) => handleSendProposition(e, track)}>
                     Send Proposition
                 </Button>
