@@ -130,7 +130,7 @@ const Rooms = () => {
                                     </Alert>
                                 )}
                                 {rooms.length ? (
-                                    <div className="mt-6 flex flex-col justify-center items-center gap-6">
+                                    <div className="w-full mt-6 flex flex-col justify-center items-center gap-6">
                                         {rooms.map((room, index) => (
                                             <Card key={index} className="w-[min(500px,100%)]">
                                                 <CardBody className="relative">
@@ -142,8 +142,8 @@ const Rooms = () => {
                                                         {room.description}
                                                     </Typography>
                                                     <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100 text-nowrap w-full overflow-hidden" style={{textOverflow: "ellipsis"}}>
-                                                        <Link to={`${import.meta.env.VITE_BASE_URL}/room/${room._id}`}>
-                                                            {import.meta.env.VITE_BASE_URL}/room/{room._id}
+                                                        <Link to={`${import.meta.env.VITE_BASE_URL}/room/${room.slug}`}>
+                                                            {import.meta.env.VITE_BASE_URL}/room/{room.slug}
                                                         </Link>
                                                     </Typography>
                                                 </CardBody>
