@@ -22,6 +22,7 @@ const Room = () => {
     const [error, setError] = useState("");
     const [token, setToken] = useState(null);
     const [tracksNumber, setTracksNumber] = useState(0);
+    const [loadingMore, setLoadingMore] = useState(false);
 
     useEffect(() => {
         getRoomById(id);
@@ -85,6 +86,7 @@ const Room = () => {
         setError("");
         let accessToken = token;
 
+        setLoadingMore(true);
         NProgress.start();
 
         // Checking if the token is available and if it is expired
@@ -97,6 +99,7 @@ const Room = () => {
             }catch(error){
                 toast(error.response.data.message || error.message, {type: "error"});
                 NProgress.done();
+                setLoadingMore(false);
                 return;
             }
         }
@@ -113,6 +116,7 @@ const Room = () => {
             toast(error.message, {type: "error"});
         }finally{
             NProgress.done();
+            setLoadingMore(false);
         }
     }
 
@@ -199,12 +203,20 @@ const Room = () => {
                                                 {searchResults.map((track) => (
                                                     <TrackCard key={track.id} track={track} handleSendProposition={handleSendProposition} />
                                                 ))}
-                                                {searchNext && (
+                                                {loadingMore ? (
                                                     <div className="flex justify-center mt-6 mb-24">
-                                                        <Button color="green" variant="gradient" onClick={handleLoadMore}>
-                                                            Load More
-                                                        </Button>
+                                                        <DefaultSpinner />
                                                     </div>
+                                                ):(
+                                                    <>
+                                                        {searchNext && (
+                                                            <div className="flex justify-center mt-6 mb-24">
+                                                                <Button color="green" variant="gradient" onClick={handleLoadMore}>
+                                                                    Load More
+                                                                </Button>
+                                                            </div>
+                                                        )}
+                                                    </>
                                                 )}
                                             </>
                                         ):(
