@@ -94,11 +94,13 @@ const EditRoom = () => {
                                                     value={name}
                                                     onChange={(e) => setName(e.target.value)}
                                                     label="Name"
+                                                    required
                                                 />
                                                 <Input
                                                     value={description}
                                                     onChange={(e) => setDescription(e.target.value)}
                                                     label="Description"
+                                                    required
                                                 />
                                                 <Checkbox
                                                     checked={isPublic}
