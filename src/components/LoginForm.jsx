@@ -67,6 +67,7 @@ const LoginForm = () => {
                             inputMode="email"
                             size="lg"
                             label="Email"
+                            required
                         />
                         <Input
                             value={password}
@@ -74,6 +75,7 @@ const LoginForm = () => {
                             size="lg"
                             type="password"
                             label="Password"
+                            required
                         />
                         <Button color="green" variant="gradient" onClick={handleSubmit}>
                             Login
