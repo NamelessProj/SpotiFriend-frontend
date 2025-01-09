@@ -83,12 +83,14 @@ const RegisterForm = () => {
                             inputMode="email"
                             size="lg"
                             label="Email"
+                            required
                         />
                         <Input
                             value={username}
                             onChange={(e) => setUsername(e.target.value)}
                             size="lg"
                             label="Username"
+                            required
                         />
                         <Input
                             value={password}
@@ -96,6 +98,7 @@ const RegisterForm = () => {
                             size="lg"
                             type="password"
                             label="Password"
+                            required
                         />
                         <Input
                             value={confirmPassword}
@@ -103,6 +106,7 @@ const RegisterForm = () => {
                             size="lg"
                             type="password"
                             label="Confirm Password"
+                            required
                         />
                         <Button color="green" variant="gradient" onClick={handleSubmit}>
                             Register
