@@ -1,10 +1,11 @@
 import {useAuthStore} from "../stores/authStore.js";
-import {Link, Navigate} from "react-router-dom";
+import {Navigate} from "react-router-dom";
 import {useRoomStore} from "../stores/roomStore.js";
 import {useEffect, useState} from "react";
-import {Alert, Button, Card, CardBody, CardFooter, Checkbox, Input, Typography} from "@material-tailwind/react";
+import {Alert, Button, Card, CardBody, Checkbox, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
+import RoomCard from "../components/RoomCard.jsx";
 
 const Rooms = () => {
     const {userInfo} = useAuthStore();
@@ -132,32 +133,7 @@ const Rooms = () => {
                                 {rooms.length ? (
                                     <div className="w-full mt-6 flex flex-col justify-center items-center gap-6">
                                         {rooms.map((room, index) => (
-                                            <Card key={index} className="w-[min(500px,100%)]">
-                                                <CardBody className="relative">
-                                                    <div className="absolute top-2 left-2 w-4 h-4 rounded-full" style={{background: room.isPublic ? 'green' : 'red'}} />
-                                                    <Typography variant="h5" className="mb-2">
-                                                        {room.name}
-                                                    </Typography>
-                                                    <Typography>
-                                                        {room.description}
-                                                    </Typography>
-                                                    <Typography className="font-bold text-green-700 opacity-70 hover:opacity-100 text-nowrap w-full overflow-hidden" style={{textOverflow: "ellipsis"}}>
-                                                        <Link to={`${window.location.origin}/room/${room.slug}`}>
-                                                            {window.location.origin}/room/{room.slug}
-                                                        </Link>
-                                                    </Typography>
-                                                </CardBody>
-                                                <CardFooter className="flex justify-between">
-                                                    <Button color="green" variant="gradient">
-                                                        <Link to={`/room/edit/${room._id}`}>
-                                                            Edit
-                                                        </Link>
-                                                    </Button>
-                                                    <Button color="red" variant="gradient" onClick={(e) => handleDeleteRoom(e, room._id)}>
-                                                        Delete
-                                                    </Button>
-                                                </CardFooter>
-                                            </Card>
+                                            <RoomCard key={index} room={room} handleDeleteRoom={handleDeleteRoom} />
                                         ))}
                                     </div>
                                 ):(
