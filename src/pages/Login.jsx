@@ -11,9 +11,7 @@ const Login = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-        if(userInfo){
-            navigate("/");
-        }
+        if(userInfo) navigate("/");
     }, [navigate, userInfo]);
 
     return (
