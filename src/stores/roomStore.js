@@ -22,7 +22,7 @@ export const useRoomStore = create((set) => ({
     },
 
     getRoomBySlug: async (slug) => {
-        set({roomLoading: true, roomError: null});
+        set({room: null, roomLoading: true, roomError: null});
         try{
             const response = await axios.get(`${import.meta.env.VITE_API_URL}/room/slug/${slug}`);
             set(() => ({room: response.data.room, roomLoading: false}));
