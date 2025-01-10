@@ -224,7 +224,7 @@ const UserProfile = () => {
                             </CardBody>
                         </Card>
                     </div>
-                    <div className="mt-24 max-w-[500px] mx-auto">
+                    <div className="my-24 max-w-[500px] mx-auto">
                         <Card>
                             <CardHeader color="red" variant="gradient" className="flex justify-center items-center py-3">
                                 <Typography variant="h2">
