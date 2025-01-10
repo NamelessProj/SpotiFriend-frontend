@@ -11,10 +11,10 @@ const Home = () => {
     const handleJoinRoom = (e) => {
         e.preventDefault();
         setError("");
-        const id = input.trim();
-        if(id === ""){
-            setError("Please enter a valid room ID.");
-        }else navigate(`/room/${id}`);
+        const slug = input.trim();
+        if(slug === ""){
+            setError("Please enter a valid room slug.");
+        }else navigate(`/room/${slug}`);
     }
 
     return (
