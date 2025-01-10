@@ -40,7 +40,7 @@ const EditRoom = () => {
         const roomName = name.trim();
         const roomDescription = description.trim();
 
-        if(roomName === "" || roomDescription === ""){
+        if(roomName === ""){
             setError("Please fill in all the fields.");
             return;
         }
@@ -107,7 +107,6 @@ const EditRoom = () => {
                                                     value={description}
                                                     onChange={(e) => setDescription(e.target.value)}
                                                     label="Description"
-                                                    required
                                                 />
                                                 <Checkbox
                                                     checked={isPublic}
