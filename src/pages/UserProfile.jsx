@@ -28,9 +28,7 @@ const UserProfile = () => {
         if(userInfo){
             setUsername(userInfo.username);
             setEmail(userInfo.email);
-        }else{
-            navigate("/login");
-        }
+        }else navigate("/login");
     }, [userInfo, navigate]);
 
     useEffect(() => {
