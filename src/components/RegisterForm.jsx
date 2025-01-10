@@ -15,9 +15,7 @@ const RegisterForm = () => {
     const {setCredentials} = useAuthStore();
 
     useEffect(() => {
-        if(user){
-            setCredentials(user);
-        }
+        if(user) setCredentials(user);
     }, [user]);
 
     const handleSubmit = async (e) => {
