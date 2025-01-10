@@ -131,7 +131,7 @@ const Rooms = () => {
                                     </Alert>
                                 )}
                                 {rooms.length ? (
-                                    <div className="w-full mt-6 flex flex-col justify-center items-center gap-6">
+                                    <div className="w-full mt-6 mb-24 flex flex-col justify-center items-center gap-6">
                                         {rooms.map((room, index) => (
                                             <RoomCard key={index} room={room} handleDeleteRoom={handleDeleteRoom} />
                                         ))}
