@@ -1,7 +1,7 @@
 import {Button, Card, CardBody, CardFooter, Typography} from "@material-tailwind/react";
 import {Link} from "react-router-dom";
 
-const RoomCard = ({room, handleDeleteRoom}) => {
+const RoomCard = ({room, handleOpenDeleteDialog}) => {
     const link = `${window.location.origin}/room/${room.slug}`;
 
     return (
@@ -26,7 +26,7 @@ const RoomCard = ({room, handleDeleteRoom}) => {
                         Edit
                     </Link>
                 </Button>
-                <Button color="red" variant="gradient" onClick={(e) => handleDeleteRoom(e, room._id)}>
+                <Button color="red" variant="gradient" onClick={(e) => handleOpenDeleteDialog(e, room)}>
                     Delete
                 </Button>
             </CardFooter>
