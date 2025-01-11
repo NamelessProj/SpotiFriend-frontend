@@ -2,7 +2,17 @@ import {useAuthStore} from "../stores/authStore.js";
 import {Navigate} from "react-router-dom";
 import {useRoomStore} from "../stores/roomStore.js";
 import {useEffect, useState} from "react";
-import {Alert, Button, Card, CardBody, Checkbox, Input, Typography} from "@material-tailwind/react";
+import {
+    Alert,
+    Button,
+    Card,
+    CardBody,
+    Checkbox,
+    Dialog, DialogBody, DialogFooter,
+    DialogHeader,
+    Input,
+    Typography
+} from "@material-tailwind/react";
 import NProgress from "nprogress";
 import DefaultSpinner from "../components/DefaultSpinner.jsx";
 import RoomCard from "../components/RoomCard.jsx";
@@ -15,6 +25,11 @@ const Rooms = () => {
     const [roomDescription, setRoomDescription] = useState("");
     const [roomIsPublic, setRoomIsPublic] = useState(false);
     const [roomCount, setRoomCount] = useState(0);
+
+    const [deleteRoomName, setDeleteRoomName] = useState("");
+    const [deleteRoomId, setDeleteRoomId] = useState("");
+    const [openDialog, setOpenDialog] = useState(false);
+    const handleOpen = () => setOpenDialog(!openDialog);
 
     const [error, setError] = useState("");
 
@@ -57,6 +72,13 @@ const Rooms = () => {
         }
     }
 
+    const handleOpenDeleteDialog = (e, room) => {
+        e.preventDefault();
+        setDeleteRoomName(room.name);
+        setDeleteRoomId(room._id);
+        handleOpen();
+    }
+
     const handleDeleteRoom = async (e, id) => {
         e.preventDefault();
 
@@ -66,6 +88,7 @@ const Rooms = () => {
         }catch(error){
             console.error(error);
         }finally{
+            setOpenDialog(false);
             NProgress.done();
         }
     }
@@ -74,6 +97,29 @@ const Rooms = () => {
         <main>
             {userInfo ? (
                 <div>
+                    <Dialog open={openDialog} handler={handleOpen} size="sm">
+                        <DialogHeader className="flex flex-col items-center justify-center gap-3">
+                            <Typography variant="h3" className="text-center text-balance">
+                                Are you sure you want to delete this room?
+                            </Typography>
+                            <Typography variant="h2" className="text-center text-balance">
+                                {deleteRoomName}
+                            </Typography>
+                        </DialogHeader>
+                        <DialogBody>
+                            <Typography>
+                                This action is irreversible. You won't be able to recover the room.
+                            </Typography>
+                        </DialogBody>
+                        <DialogFooter className="flex justify-between">
+                            <Button color="green" onClick={handleOpen}>
+                                Cancel
+                            </Button>
+                            <Button color="red" onClick={(e) =>  handleDeleteRoom(e, deleteRoomId)}>
+                                Delete
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
                     <Typography variant="h1" as="h2" className="text-center text-primary-white">
                         Your Rooms
                     </Typography>
@@ -133,7 +179,7 @@ const Rooms = () => {
                                 {rooms.length ? (
                                     <div className="w-full mt-6 mb-24 flex flex-col justify-center items-center gap-6">
                                         {rooms.map((room, index) => (
-                                            <RoomCard key={index} room={room} handleDeleteRoom={handleDeleteRoom} />
+                                            <RoomCard key={index} room={room} handleOpenDeleteDialog={handleOpenDeleteDialog} />
                                         ))}
                                     </div>
                                 ):(
