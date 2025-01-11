@@ -42,10 +42,10 @@ const Login = () => {
                             }}
                         >
                             <TabPanel value="login">
-                                <LoginForm setLoading={setLoading}/>
+                                <LoginForm setLoading={setLoading} />
                             </TabPanel>
                             <TabPanel value="register">
-                                <RegisterForm setLoading={setLoading}/>
+                                <RegisterForm setLoading={setLoading} />
                             </TabPanel>
                         </TabsBody>
                     </Tabs>
