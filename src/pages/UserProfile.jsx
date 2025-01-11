@@ -12,8 +12,6 @@ const UserProfile = () => {
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
 
-    const [logoutError, setLogoutError] = useState("");
-
     const [currentPassword, setCurrentPassword] = useState("");
     const [newPassword, setNewPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -91,22 +89,6 @@ const UserProfile = () => {
         }
     }
 
-    const handleLogout = async (e) => {
-        e.preventDefault();
-        setLogoutError("");
-
-        try{
-            NProgress.start();
-            await userLogout();
-            logout();
-            navigate("/");
-        }catch(error){
-            setLogoutError(error);
-        }finally{
-            NProgress.done();
-        }
-    }
-
     const handleDelete = async (e) => {
         e.preventDefault();
         setDeleteError("");
@@ -137,16 +119,6 @@ const UserProfile = () => {
                             </Alert>
                         </div>
                     )}
-                    <div className="flex flex-col gap-3 justify-center items-center">
-                        {logoutError && (
-                            <Alert color="red">
-                                {logoutError}
-                            </Alert>
-                        )}
-                        <Button color="red" variant="gradient" onClick={handleLogout}>
-                            Logout
-                        </Button>
-                    </div>
                     <div className="mt-12 max-w-[500px] mx-auto">
                         <Card>
                             <CardHeader color="green" variant="gradient" className="flex justify-center items-center py-3">
