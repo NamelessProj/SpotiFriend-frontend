@@ -1,9 +1,26 @@
 import {Button, Menu, MenuHandler, MenuItem, MenuList, Typography} from "@material-tailwind/react";
 import {useAuthStore} from "../stores/authStore.js";
 import {Link} from "react-router-dom";
+import NProgress from "nprogress";
+import {useUserStore} from "../stores/userStore.js";
 
 const Header = () => {
-    const {userInfo} = useAuthStore();
+    const {userInfo, logout} = useAuthStore();
+    const {userLogout} = useUserStore();
+
+    const handleLogout = async (e) => {
+        e.preventDefault();
+
+        try{
+            NProgress.start();
+            await userLogout();
+            logout();
+        }catch(error){
+            console.error(error);
+        }finally{
+            NProgress.done();
+        }
+    }
 
     return (
         <header className="flex flex-col-reverse gap-2 justify-center items-center my-2 relative">
@@ -22,15 +39,20 @@ const Header = () => {
                             </Button>
                         </MenuHandler>
                         <MenuList>
-                            <MenuItem>
-                                <Link to="profile">
+                            <MenuItem className="flex">
+                                <Link to="profile" className="flex-grow">
                                     Profile
                                 </Link>
                             </MenuItem>
-                            <MenuItem>
-                                <Link to="rooms">
+                            <MenuItem className="flex">
+                                <Link to="rooms" className="flex-grow">
                                     Rooms
                                 </Link>
+                            </MenuItem>
+                            <MenuItem className="flex">
+                                <Button className="flex-grow" color="red" onClick={handleLogout}>
+                                    Logout
+                                </Button>
                             </MenuItem>
                         </MenuList>
                     </Menu>
