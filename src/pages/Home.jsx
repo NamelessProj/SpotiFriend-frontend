@@ -36,7 +36,7 @@ const Home = () => {
                             <Input
                                 label="Enter the room slug."
                                 value={input}
-                                onChange={(e) => setInput(e.target.value)}
+                                onChange={(e) => setInput(e.target.value.toLowerCase().replace(/\s+/g, '-'))}
                                 variant="outlined"
                                 className="rounded-b-none"
                                 required
