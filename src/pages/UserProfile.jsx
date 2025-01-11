@@ -7,7 +7,7 @@ import NProgress from "nprogress";
 
 const UserProfile = () => {
     const {userInfo, setCredentials, logout} = useAuthStore();
-    const {user, userError, userDeleteSuccess, userLogout, updateUser, updateUserPassword, deleteUser} = useUserStore();
+    const {user, userError, userDeleteSuccess, updateUser, updateUserPassword, deleteUser} = useUserStore();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [error, setError] = useState("");
