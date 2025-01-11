@@ -4,7 +4,7 @@ import {useUserStore} from "../stores/userStore.js";
 import {useAuthStore} from "../stores/authStore.js";
 import NProgress from "nprogress";
 
-const LoginForm = () => {
+const LoginForm = ({setLoading}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
@@ -30,10 +30,12 @@ const LoginForm = () => {
 
         try{
             NProgress.start();
+            setLoading(true);
             await login({email: emailForm, password: passwordForm});
         }catch(error){
             setError(error);
         }finally{
+            setLoading(false);
             NProgress.done();
         }
     }
