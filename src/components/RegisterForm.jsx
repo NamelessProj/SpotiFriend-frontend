@@ -4,7 +4,7 @@ import {useAuthStore} from "../stores/authStore.js";
 import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
 import NProgress from "nprogress";
 
-const RegisterForm = () => {
+const RegisterForm = ({setLoading}) => {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
@@ -46,10 +46,12 @@ const RegisterForm = () => {
 
         try{
             NProgress.start();
+            setLoading(true);
             await register({email: emailForm, password: passwordForm, username: usernameForm});
         }catch(error){
             setError(error);
         }finally{
+            setLoading(false);
             NProgress.done();
         }
     }
