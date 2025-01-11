@@ -1,7 +1,17 @@
 import {useAuthStore} from "../stores/authStore.js";
 import {useNavigate} from "react-router-dom";
 import {useEffect, useState} from "react";
-import {Alert, Button, Card, CardBody, CardHeader, Input, Typography} from "@material-tailwind/react";
+import {
+    Alert,
+    Button,
+    Card,
+    CardBody,
+    CardHeader,
+    Dialog, DialogBody, DialogFooter,
+    DialogHeader,
+    Input,
+    Typography
+} from "@material-tailwind/react";
 import {useUserStore} from "../stores/userStore.js";
 import NProgress from "nprogress";
 
@@ -19,6 +29,9 @@ const UserProfile = () => {
 
     const [deletePassword, setDeletePassword] = useState("");
     const [deleteError, setDeleteError] = useState("");
+
+    const [openDialog, setOpenDialog] = useState(false);
+    const handleOpen = () => setOpenDialog(!openDialog);
 
     const navigate = useNavigate();
 
@@ -89,6 +102,15 @@ const UserProfile = () => {
         }
     }
 
+    const handleOpenDeleteDialog = (e) => {
+        e.preventDefault();
+        if(deletePassword === ""){
+            setDeleteError("Please fill in all the fields.");
+            return;
+        }
+        handleOpen();
+    }
+
     const handleDelete = async (e) => {
         e.preventDefault();
         setDeleteError("");
@@ -105,6 +127,7 @@ const UserProfile = () => {
             setDeleteError(error);
         }finally{
             NProgress.done();
+            setOpenDialog(false);
         }
     }
 
@@ -112,6 +135,26 @@ const UserProfile = () => {
         <main>
             {userInfo && (
                 <div>
+                    <Dialog open={openDialog} handler={handleOpen} size="sm">
+                        <DialogHeader>
+                            <Typography variant="h2" className="text-center text-balance">
+                                Are you sure you want to delete your account?
+                            </Typography>
+                        </DialogHeader>
+                        <DialogBody>
+                            <Typography>
+                                This action is irreversible and will delete all your data.
+                            </Typography>
+                        </DialogBody>
+                        <DialogFooter className="flex justify-between">
+                            <Button color="red" onClick={handleOpen}>
+                                Cancel
+                            </Button>
+                            <Button color="red" onClick={handleDelete}>
+                                Delete Account
+                            </Button>
+                        </DialogFooter>
+                    </Dialog>
                     {userError && (
                         <div className="mb-6 flex justify-center items-center">
                             <Alert color="red" className="w-fit">
@@ -207,7 +250,7 @@ const UserProfile = () => {
                                         {deleteError}
                                     </Alert>
                                 )}
-                                <form className="flex flex-col gap-3" onSubmit={handleDelete}>
+                                <form className="flex flex-col gap-3" onSubmit={handleOpenDeleteDialog}>
                                     <Input
                                         value={deletePassword}
                                         onChange={(e) => setDeletePassword(e.target.value)}
@@ -215,7 +258,7 @@ const UserProfile = () => {
                                         label="Password"
                                         required
                                     />
-                                    <Button color="red" variant="gradient" onClick={handleDelete}>
+                                    <Button color="red" variant="gradient" onClick={handleOpenDeleteDialog}>
                                         Delete Account
                                     </Button>
                                 </form>
