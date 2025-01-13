@@ -150,19 +150,19 @@ const Room = () => {
                 <>
                     {room ? (
                         <section>
-                            <div className="flex flex-col items-center mb-12">
-                                <Typography variant="h2" className="text-primary-white text-center text-balance">
+                            <div className="flex flex-col items-center mb-12 text-primary-white text-center">
+                                <Typography variant="h2" className="text-balance">
                                     {room.name}
                                 </Typography>
-                                <Typography variant="lead" className="text-primary-white text-center">
+                                <Typography variant="lead">
                                     {room.description}
                                 </Typography>
                                 {tracksNumber > 0 ? (
-                                    <Typography className="text-primary-white text-center">
+                                    <Typography>
                                         {tracksNumber} track{tracksNumber > 1 && "s"}
                                     </Typography>
                                 ):(
-                                    <Typography className="text-primary-white text-center">
+                                    <Typography>
                                         Start searching for songs
                                     </Typography>
                                 )}
