@@ -8,7 +8,7 @@ const TrackCard = ({track, handleSendProposition}) => {
                     <img src={track.album.images[0].url} alt={track.name} loading="lazy" className="h-full object-cover mb-4 rounded-lg"/>
                 </div>
                 <Tooltip placement="top-start" content={track.name}>
-                    <Typography variant="h3" className="text-nowrap whitespace-nowrap overflow-clip w-[calc(100%-15px)]" style={{textOverflow: "ellipsis"}}>
+                    <Typography variant="h3" className="text-nowrap whitespace-nowrap overflow-clip w-[calc(100%-15px)] h-fit" style={{textOverflow: "ellipsis"}}>
                         {track.name}
                     </Typography>
                 </Tooltip>
