@@ -11,7 +11,7 @@ const Home = () => {
     const handleJoinRoom = (e) => {
         e.preventDefault();
         setError("");
-        const slug = input.trim();
+        const slug = input.trim().toLowerCase().replace(/\s+/g, '-');
         if(slug === ""){
             setError("Please enter a valid room slug.");
         }else navigate(`/room/${slug}`);
